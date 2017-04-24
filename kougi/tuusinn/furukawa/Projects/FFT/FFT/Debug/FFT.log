@@ -1,0 +1,21 @@
+﻿  FFT.cpp
+c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(212): warning C4477: 'printf' : 書式文字列 '%d' には、型 'int' の引数が必要ですが、可変個引数 1 は型 '__int64' です
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(212): note: 書式文字列に '%lld' を使用することをお勧めします
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(212): note: 書式文字列に '%I64d' を使用することをお勧めします
+c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(219): warning C4477: 'printf' : 書式文字列 '%d' には、型 'int' の引数が必要ですが、可変個引数 1 は型 '__int64' です
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(219): note: 書式文字列に '%lld' を使用することをお勧めします
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(219): note: 書式文字列に '%I64d' を使用することをお勧めします
+c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(226): warning C4477: 'printf' : 書式文字列 '%d' には、型 'int' の引数が必要ですが、可変個引数 1 は型 '__int64' です
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(226): note: 書式文字列に '%lld' を使用することをお勧めします
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(226): note: 書式文字列に '%I64d' を使用することをお勧めします
+c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(233): warning C4477: 'printf' : 書式文字列 '%d' には、型 'int' の引数が必要ですが、可変個引数 1 は型 '__int64' です
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(233): note: 書式文字列に '%lld' を使用することをお勧めします
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(233): note: 書式文字列に '%I64d' を使用することをお勧めします
+c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(253): warning C4477: 'printf' : 書式文字列 '%d' には、型 'int' の引数が必要ですが、可変個引数 1 は型 '__int64' です
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(253): note: 書式文字列に '%lld' を使用することをお勧めします
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(253): note: 書式文字列に '%I64d' を使用することをお勧めします
+c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(268): warning C4477: 'printf' : 書式文字列 '%d' には、型 'int' の引数が必要ですが、可変個引数 1 は型 '__int64' です
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(268): note: 書式文字列に '%lld' を使用することをお勧めします
+  c:\users\淳之介\desktop\講義\m1\前期金4-5_デジタル通信基礎論（古川）\2017\projects\fft\fft\fft.cpp(268): note: 書式文字列に '%I64d' を使用することをお勧めします
+  FFT.vcxproj -> C:\Users\淳之介\Desktop\講義\M1\前期金4-5_デジタル通信基礎論（古川）\2017\Projects\FFT\Debug\FFT.exe
+  FFT.vcxproj -> C:\Users\淳之介\Desktop\講義\M1\前期金4-5_デジタル通信基礎論（古川）\2017\Projects\FFT\Debug\FFT.pdb (Full PDB)
