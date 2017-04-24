@@ -3,8 +3,8 @@
 #include <string.h>
 
 //struct　をSeisekiに
-typedef struct {
-	char name[10];
+typedef struct 
+{
 	int eng;
 	int lang;
 	int math;
@@ -12,11 +12,19 @@ typedef struct {
 
 //struct Command
 typedef struct
- {
+{
 	char command[10];
 	char option[4][50];	
 }Command;
- 
+
+//record 
+typedef struct
+{
+	int number;
+	char name[20];
+	Seiseki seiseki;
+} Record
+
 //名前を入力
 char Getchar()
 {
@@ -34,6 +42,106 @@ gets(point);
 return point;
 }
 
+//----------------------------------------------------------
+//Command "i"
+
+//input one by one
+//input oneshot
+
+
+void i_command(char cmd[50], Record* record)
+{
+	char[] str;
+	str = strtok(cmd, " ");
+	str = strtok(NULL, " ");
+
+	if (str = NULL)	
+	{
+		input1by1();
+		break;	
+	}  	
+
+	else if (str[0] == "-" &&　str[1] == "f")
+	{
+		fileinput();
+		break;
+	}
+
+	else
+	{
+		input1shot();
+		break;	
+	}
+}
+
+//----------------------------------------------------------
+//Command "o"
+
+void o_command(char cmd[50], Record* record)
+{
+	char[] str;
+	str = strtok(cmd, " ");
+	str = strtok(NULL, " ");
+
+	if (str = NULL)	
+	{
+		stdoutput();
+		break;	
+	}  	
+
+	else if (str[0]== "-")
+	{
+		if(str[1] == "f")
+		{
+			fileoutput();
+			break;
+		}
+		
+		else if(str[1] == "u")
+		{
+			namelist();	
+			break;
+		}
+		
+		else if(str[1] == "n")
+		{
+			nameoutput();
+			break;
+		}
+		
+		else if(str[1] == "e")
+		{
+			englishoutput();
+			break;
+		}
+		
+		else if(str[1] == "l")
+		{
+			languageoutput();
+			break;
+		}
+		
+		else if(str[1] == "m")
+		{
+			mathoutput();
+			break;
+		}
+		else
+		 {
+			printf("このオプションは無効です\n");
+		}
+		break;
+	}
+
+	else
+	{
+		printf("このオプションは無効です\n");
+		break;	
+	}
+}
+
+
+//----------------------------------------------------------
 //Command "h"
 void h_command()
 {
@@ -54,43 +162,76 @@ void h_command()
 	printf( " h\tヘルプ表示\n\n");
 }
 
-int main(){
-Seiseki student[50];
-  
-puts("q: 終了\nh: ヘルプ\n");
+//----------------------------------------------------------
+//clear command
+void clearcmd(Command* command)
+{
+	command->command[0] = '\0';
+	int i = 0;
+	for (; i < 4; i++)
+		command->option[i][0] = '\0';
+	printf("\n:");
+} 
 
-while(1){
-char cmd[20];
-	gets(cmd);
-	//生徒情報の入力
-	if (cmd[0] == "i")
-		{
-				
-		}
-	//集計結果の表示
-	else if (cmd[0] == "o")
-		{
-		char* opt = strtok(cmd, " -");
+//----------------------------------------------------------
+//initialize the record
+void initRecord(Record* record)
+{
+	record->number = 0; 
+}
+
+//----------------------------------------------------------
+int main(){
+	Record record;  
+	puts("q: 終了\nh: ヘルプ\n");
+//	Command command;
+//	command.command[0] = '\0';
+
+	Record record;
+
+	char cmd[50];
+	cmd[0] = '\0';
+
+	while(cmd[0] != 'q')
+	{
+		clearcmd(&command);
 		
+		gets(cmd);
+		fgets(cmd, sizeof(cmd), stdin);
 		
-		}
-	//ヘルプの表示
-	else if (cmd[0] == "h")
+		//生徒情報の入力
+		if (cmd[0] == "i")
 		{
-		printf("");
-		}
-	//プログラムの終了
-	else if (cmd[0] == "q")
-		{
+		i_command();				
 		break;
 		}
-	//エラー
-	else
+
+		//集計結果の表示
+		else if (cmd[0] == "o")
 		{
-		printf("ERROR:That command is not found");	
+		o_command();
+		break;
 		}
-}
-return 0;
+		//ヘルプの表示
+		else if (cmd[0] == "h")
+		{
+		h_command();
+		break
+		}
+		//プログラムの終了
+		else if (cmd[0] == "q")
+		{
+			printf("プログラムを終了します\n");
+		break;
+		}
+		//エラー
+		else
+		{
+		printf("このコマンドは無効です\n");	
+		break;
+		}
+	}
+	return 0;
 }
 
 
