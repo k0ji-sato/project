@@ -46,6 +46,20 @@ return point;
 //Command "i"
 
 //input one by one
+bool input1by1(Record* record)
+{
+	char cmd[50];	
+	Record tmp_record;
+	
+	printf("%d人目の成績を入力してください。\n", record->number +1);
+	printf("名前:　");
+	fgets(cmd,sizeof(cmd),stdin);
+
+	if 
+}
+
+//file input
+
 //input oneshot
 
 
