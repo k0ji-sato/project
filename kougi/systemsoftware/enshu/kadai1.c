@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <stdlib.h>
 
 //struct　をSeisekiに
 typedef struct 
@@ -8,6 +9,7 @@ typedef struct
 	int eng;
 	int lang;
 	int math;
+	int total;
 } Seiseki;
 
 //struct Command
@@ -25,21 +27,20 @@ typedef struct
 	Seiseki seiseki;
 } Record
 
-//名前を入力
-char Getchar()
+bool checknumber(char *cmd)
 {
-char name[20];
-gets(name);
-return name;
-}
-
-//点数を入力
-int Getpoint()
-{
-int point;
-gets(point);
-
-return point;
+	if(strcmp(cmd, "0"))
+	{
+		return 1;
+	}
+	else if(atoi(cmd) == 0 || atoi(cmd) > 100)
+	{
+		return 0;
+	}
+	else 
+	{
+		return 1;
+	}
 }
 
 //----------------------------------------------------------
@@ -62,7 +63,7 @@ bool input1by1(Record* record)
 	}	  
 	else 
 	{
-		strcpy(tmprecord.name, cmd);
+		strcpy(tmp_record.name, cmd);
 
 		for (i=0 ; i<3; i++)
 		{
@@ -82,19 +83,85 @@ bool input1by1(Record* record)
 		if (cmd[0] == "\0")
 		{
 			printf("何も入力されていません。\n");
+			return 0;
 		}	  
-		
-
+		else if(checknumber(&cmd[0]))
+		{
+			printf("100以下の整数を入力してください。\n");
+			return 0;
+		}
+		else
+		{
+			switch(i)
+			{
+				case 0:
+					tmp_record.eng = atoi(cmd);
+					break;
+				case 1:
+					tmp_record.lang = atoi(cmd);
+					break;
+				case 2:	
+					tmp_record.math = atoi(cmd);
+					break;
+			}
+						
+		} 
 		}
 	}
-
+	strcpy(record.name , tmp_record.name);
+	record->eng = tmp_record.eng;
+	record->math = tmp_record.math;
+	record->lang = tmp_record.lang;
+	record->total = tmp_record.eng + tmp_record.math + tmp_record.lang;
+	record->number++; 
+	printf("%d人目の成績を登録しました。\n", record->number);
+	return 1;
 }
 
 
 //file input
 
 //input oneshot
+bool input1shot(char cmd, Record* record)
+{
+	Record tmp_record;
+	char str[20];
+	str = strtok(cmd, " ");
+	str = strtok(NULL, " ");
+	strcpy(tmp_record.name, str);
 
+	for (i=0 ; i<3; i++)
+	{
+		str = strtok(NULL, " ");
+		
+		if (cmd[0] == "\0")
+		{
+			printf("何も入力されていません。\n");
+			return 0;
+		}	  
+		else if(checknumber(&str[0]))
+		{
+			printf("100以下の整数を入力してください。\n");
+			return 0;
+		}
+		else
+		{
+		switch(i)
+		{
+			case 0:
+				tmp_record.eng = atoi(cmd);
+				break;
+			case 1:
+				tmp_record.lang = atoi(cmd);
+				break;
+			case 2:	
+				tmp_record.math = atoi(cmd);
+			break;
+		}
+					
+	} 
+	}
+}
 
 void i_command(char cmd[50], Record* record)
 {
@@ -104,19 +171,19 @@ void i_command(char cmd[50], Record* record)
 
 	if (str = NULL)	
 	{
-		input1by1();
+		input1by1(record);
 		break;	
 	}  	
 
 	else if (str[0] == "-" &&　str[1] == "f")
 	{
-		fileinput();
+		fileinput(cmd, record);
 		break;
 	}
 
 	else
 	{
-		input1shot();
+		input1shot(cmd, record);
 		break;	
 	}
 }
@@ -141,49 +208,49 @@ void o_command(char cmd[50], Record* record)
 		if(str[1] == "f")
 		{
 			fileoutput();
-			break;
+			return 1;
 		}
 		
 		else if(str[1] == "u")
 		{
 			namelist();	
-			break;
+			return 1;
 		}
 		
 		else if(str[1] == "n")
 		{
 			nameoutput();
-			break;
+			return 1;
 		}
 		
 		else if(str[1] == "e")
 		{
 			englishoutput();
-			break;
+			return 1;
 		}
 		
 		else if(str[1] == "l")
 		{
 			languageoutput();
-			break;
+			return 1;
 		}
 		
 		else if(str[1] == "m")
 		{
 			mathoutput();
-			break;
+			return 1;
 		}
 		else
 		 {
 			printf("このオプションは無効です\n");
 		}
-		break;
+		return 0;
 	}
 
 	else
 	{
 		printf("このオプションは無効です\n");
-		break;	
+		return 0;	
 	}
 }
 
@@ -211,14 +278,14 @@ void h_command()
 
 //----------------------------------------------------------
 //clear command
-void clearcmd(Command* command)
-{
-	command->command[0] = '\0';
-	int i = 0;
-	for (; i < 4; i++)
-		command->option[i][0] = '\0';
-	printf("\n:");
-} 
+//void clearcmd(Command* command)
+//{
+//	command->command[0] = '\0';
+//	int i = 0;
+//	for (; i < 4; i++)
+//		command->option[i][0] = '\0';
+//	printf("\n:");
+//} 
 
 //----------------------------------------------------------
 //initialize the record
