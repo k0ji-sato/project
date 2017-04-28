@@ -6,7 +6,7 @@
 #include <string>
 #include <fstream>
 
-#define M 512
+#define M 256
 #define PI 3.14159265359
 
 typedef struct {
