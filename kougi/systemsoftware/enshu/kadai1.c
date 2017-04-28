@@ -13,11 +13,11 @@ typedef struct
 } Seiseki;
 
 //struct Command
-typedef struct
-{
-	char command[10];
-	char option[4][50];	
-}Command;
+//typedef struct
+//{
+//	char command[10];
+//	char option[4][50];	
+//}Command;
 
 //record 
 typedef struct
@@ -136,7 +136,7 @@ bool input1shot(char cmd, Record* record)
 		
 		if (cmd[0] == "\0")
 		{
-			printf("何も入力されていません。\n");
+			printf("オプションが足りません。\n");
 			return 0;
 		}	  
 		else if(checknumber(&str[0]))
@@ -149,18 +149,26 @@ bool input1shot(char cmd, Record* record)
 		switch(i)
 		{
 			case 0:
-				tmp_record.eng = atoi(cmd);
+				tmp_record.eng = atoi(str);
 				break;
 			case 1:
-				tmp_record.lang = atoi(cmd);
+				tmp_record.lang = atoi(str);
 				break;
 			case 2:	
-				tmp_record.math = atoi(cmd);
+				tmp_record.math = atoi(str);
 			break;
 		}
 					
 	} 
 	}
+	strcpy(record.name , tmp_record.name);
+	record->eng = tmp_record.eng;
+	record->math = tmp_record.math;
+	record->lang = tmp_record.lang;
+	record->total = tmp_record.eng + tmp_record.math + tmp_record.lang;
+	record->number++; 
+	printf("%d人目の成績を登録しました。\n", record->number);
+	return 1;
 }
 
 void i_command(char cmd[50], Record* record)
