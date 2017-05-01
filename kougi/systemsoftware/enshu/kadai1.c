@@ -120,6 +120,55 @@ bool input1by1(Record* record)
 
 
 //file input
+bool loadfile()
+{
+	Seiseki tmp_seiseki;
+	Record tmp_record;
+	tmp_record.number = 0;
+	int rows = 0;
+	char* tp;
+	char sep[1] = {arg_sep};
+	charrowStr[sizeof(tmp_seiseki)];
+
+	while(fgets(rowStr, sizeof(tmp_seiseki), fp) != NULL && rows++ < 3)
+	{
+		if (((tp = strchr(rowStr, '\n')) != NULL)&&(strlen(rowStr) > 1))
+		*tp = '\0';
+
+		tp = strtok(rowStr, sep);
+		strcpy(tmp_seiseki.name,tp);
+
+		int i = 0;
+		while(tp != NULL)
+		{
+			tp = strtok(NULL, sep);
+			if(tp != NULL)
+			{
+				
+				switch(i)
+				{
+					case 0:
+						tmp_record.eng = atoi(cmd);
+						break;
+					case 1:
+						tmp_record.lang = atoi(cmd);
+						break;
+					case 2:	
+						tmp_record.math = atoi(cmd);
+				}
+			}
+			if(i++ > 3)
+				break;
+		}  
+		
+		if(i != 4)
+		{
+			puts("データ形式が正しくありません。");
+			return 0;
+		}
+	}	
+
+}
 
 //input oneshot
 bool input1shot(char cmd, Record* record)
