@@ -1,12 +1,14 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <chrono>
+//#include <chrono>
 #include <string>
 #include <fstream>
+#include <time.h>
+#include <sys/time.h>
 
-#define M 256
+#define M 1024 
 #define PI 3.14159265359
 
 typedef struct {
@@ -185,32 +187,10 @@ int main(int argc, char* argv[]){
 	complex f[M], f_d[M], f_f[M];
 	complex g[M], g_d[M], g_f[M];
 	complex fg[M];
-	
-	complex z1,z2,ans;
+
 	int i;
-	std::chrono::system_clock::time_point start, end;
-
-	z1.r = 2;
-	z1.i = 1;
-	z2.r = 1;
-	z2.i = 2;
-	
-	ans = complex_add(z1,z2);
-	printf("complex_add\n");
-	printf("%lf+j%lf + %lf+j%lf = %lf+j%lf\n", z1.r, z1.i, z2.r, z2.i, ans.r, ans.i);
-	ans = complex_sub(z1,z2);
-	printf("complex_sub\n");
-	printf("%lf+j%lf - %lf+j%lf = %lf+j%lf\n", z1.r, z1.i, z2.r, z2.i, ans.r, ans.i);
-	ans = complex_mul(z1,z2);
-	printf("complex_mul\n");
-	printf("%lf+j%lf × %lf+j%lf = %lf+j%lf\n", z1.r, z1.i, z2.r, z2.i, ans.r, ans.i);
-	ans = complex_div(z1,z2);
-	printf("complex_div\n");
-	printf("%lf+j%lf ÷ %lf+j%lf = %lf+j%lf\n", z1.r, z1.i, z2.r, z2.i, ans.r, ans.i);
-	
-
-
-
+//	std::chrono::system_clock::time_point start, end;
+	struct timeval start,end;
 
 	for (i = 0; i < N; i++){
 		f[i].r = cos(2 * i * PI / N);
@@ -227,33 +207,44 @@ int main(int argc, char* argv[]){
 
 	output("./data_f.txt", f, N);
 	output("./data_g.txt", g, N);
-
+//DFT
 	printf("DFT\n");
-	start = std::chrono::system_clock::now();
+	gettimeofday(&start,NULL);
+
 	dft(f_d, N, 0);
-	end = std::chrono::system_clock::now();
-	printf("time = %d μsec\n", std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
-	output("./DFT.txt", f_d, N);
 	
+	gettimeofday(&end,NULL);
+	printf("time = %lf\n",(end.tv_sec - start.tv_sec)-(end.tv_usec - start.tv_usec));
+	output("./DFT.txt", f_d, N);
+
+//IDFT	
 	printf("\nIDFT\n");
-	start = std::chrono::system_clock::now();
+	gettimeofday(&start,NULL);
+	
 	dft(f_d, N, 1);
-	end = std::chrono::system_clock::now();
-	printf("time = %d μsec\n", std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+	
+	gettimeofday(&end,NULL);
+	printf("time = %lf\n",(end.tv_sec - start.tv_sec)-(end.tv_usec - start.tv_usec));
 	output("./IDFT.txt", f_d, N);
 	
+//FFT
 	printf("\nFFT\n");
-	start = std::chrono::system_clock::now();
+	gettimeofday(&start,NULL);
+
 	fft(f_f, N, 0);
-	end = std::chrono::system_clock::now();
-	printf("time = %d μsec\n", std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+
+	gettimeofday(&end,NULL);
+	printf("time = %lf\n",(end.tv_sec - start.tv_sec)-(end.tv_usec - start.tv_usec));
 	output("./FFT.txt", f_f, N);
 
+//IDFT	
 	printf("\nIFFT\n");
-	start = std::chrono::system_clock::now();
+	gettimeofday(&start,NULL);
+
 	fft(f_f, N, 1);
-	end = std::chrono::system_clock::now();
-	printf("time = %d μsec\n", std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+
+	gettimeofday(&end,NULL);
+	printf("time = %lf\n",(end.tv_sec - start.tv_sec)-(end.tv_usec - start.tv_usec));
 	output("./IFFT.txt", f_f, N);
 
 	for (i = 0; i < N; i++){
@@ -261,8 +252,10 @@ int main(int argc, char* argv[]){
 		f_f[i] = f[i];
 	}
 
+//f*g DFT
 	printf("\nf*g DFT\n");
-	start = std::chrono::system_clock::now();
+	gettimeofday(&start,NULL);
+
 	dft(f_d, N, 0);
 	dft(g_d, N, 0);
 	output("./fg_DFT_f.txt", f_d, N);
@@ -272,12 +265,15 @@ int main(int argc, char* argv[]){
 	}
 	output("./fg_DFT.txt", fg, N);
 	dft(fg, N, 1);
-	end = std::chrono::system_clock::now();
-	printf("time = %d μsec\n", std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+
+	gettimeofday(&end,NULL);
+	printf("time = %lf\n",(end.tv_sec - start.tv_sec)-(end.tv_usec - start.tv_usec));
 	output("./fg_IDFT.txt", fg, N);
 
+//f*g FFT
 	printf("\nf*g FFT\n");
-	start = std::chrono::system_clock::now();
+
+	gettimeofday(&start,NULL);
 	fft(f_f, N, 0);
 	fft(g_f, N, 0);
 	output("./fg_FFT_f.txt", f_f, N);
@@ -287,8 +283,9 @@ int main(int argc, char* argv[]){
 	}
 	output("./fg_FFT.txt", fg, N);
 	fft(fg, N, 1);
-	end = std::chrono::system_clock::now();
-	printf("time = %d μsec\n", std::chrono::duration_cast<std::chrono::microseconds>(end - start).count());
+
+	gettimeofday(&end,NULL);
+	printf("time = %lf\n",(end.tv_sec - start.tv_sec)-(end.tv_usec - start.tv_usec));
 	output("./fg_IFFT.txt", fg, N);
 
 	printf("\nPress enter.\n");

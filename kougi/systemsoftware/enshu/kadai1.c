@@ -1,45 +1,46 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <stdlib.h>
 
 //struct　をSeisekiに
 typedef struct 
 {
+	char name[20];
 	int eng;
 	int lang;
 	int math;
+	int total;
 } Seiseki;
 
 //struct Command
-typedef struct
-{
-	char command[10];
-	char option[4][50];	
-}Command;
+//typedef struct
+//{
+//	char command[10];
+//	char option[4][50];	
+//}Command;
 
 //record 
 typedef struct
 {
 	int number;
-	char name[20];
-	Seiseki seiseki;
+	Seiseki seiseki[50];
 } Record
 
-//名前を入力
-char Getchar()
+bool checknumber(char *cmd)
 {
-char name[20];
-gets(name);
-return name;
-}
-
-//点数を入力
-int Getpoint()
-{
-int point;
-gets(point);
-
-return point;
+	if(strcmp(cmd, "0"))
+	{
+		return 1;
+	}
+	else if(atoi(cmd) == 0 || atoi(cmd) > 100)
+	{
+		return 0;
+	}
+	else 
+	{
+		return 1;
+	}
 }
 
 //----------------------------------------------------------
@@ -49,7 +50,7 @@ return point;
 bool input1by1(Record* record)
 {
 	char cmd[50];	
-	Record tmp_record;
+	Seiseki tmp_seiseki;
 	
 	printf("%d人目の成績を入力してください。\n", record->number +1);
 	printf("名前:　");
@@ -62,7 +63,7 @@ bool input1by1(Record* record)
 	}	  
 	else 
 	{
-		strcpy(tmprecord.name, cmd);
+		strcpy(tmp_seiseki.name, cmd);
 
 		for (i=0 ; i<3; i++)
 		{
@@ -82,19 +83,145 @@ bool input1by1(Record* record)
 		if (cmd[0] == "\0")
 		{
 			printf("何も入力されていません。\n");
+			return 0;
 		}	  
-		
-
+		else if(checknumber(&cmd[0]))
+		{
+			printf("100以下の整数を入力してください。\n");
+			return 0;
+		}
+		else
+		{
+			switch(i)
+			{
+				case 0:
+					tmp_seiseki.eng = atoi(cmd);
+					break;
+				case 1:
+					tmp_seiseki.lang = atoi(cmd);
+					break;
+				case 2:	
+					tmp_seiseki.math = atoi(cmd);
+					break;
+			}
+						
+		} 
 		}
 	}
-
+//	strcpy(record.name , tmp_seiseki.name);
+//	record->eng = tmp_record.eng;
+//	record->math = tmp_record.math;
+//	record->lang = tmp_record.lang;
+	tmp_seiseki->total = tmp_seiseki.eng + tmp_seiseki.lang + tmp_seiseki.math;
+	record->seiseki[record->number] = tmp_seiseki; 
+	record->number++; 
+	printf("%d人目の成績を登録しました。\n", record->number);
+	return 1;
 }
 
 
 //file input
+bool loadfile()
+{
+	Seiseki tmp_seiseki;
+	Record tmp_record;
+	tmp_record.number = 0;
+	int rows = 0;
+	char* tp;
+	char sep[1] = {arg_sep};
+	charrowStr[sizeof(tmp_seiseki)];
+
+	while(fgets(rowStr, sizeof(tmp_seiseki), fp) != NULL && rows++ < 3)
+	{
+		if (((tp = strchr(rowStr, '\n')) != NULL)&&(strlen(rowStr) > 1))
+		*tp = '\0';
+
+		tp = strtok(rowStr, sep);
+		strcpy(tmp_seiseki.name,tp);
+
+		int i = 0;
+		while(tp != NULL)
+		{
+			tp = strtok(NULL, sep);
+			if(tp != NULL)
+			{
+				
+				switch(i)
+				{
+					case 0:
+						tmp_seiseki.eng = atoi(cmd);
+						break;
+					case 1:
+						tmp_seiseki.lang = atoi(cmd);
+						break;
+					case 2:	
+						tmp_seiseki.math = atoi(cmd);
+				}
+			}
+			if(i++ > 3)
+				break;
+		}  
+		
+		if(i != 4)
+		{
+			puts("データ形式が正しくありません。");
+			return 0;
+		}
+	}	
+
+}
 
 //input oneshot
+bool input1shot(char cmd, Record* record)
+{
+	Seiseki tmp_seiseki;
+	char str[20];
+	str = strtok(cmd, " ");
+	str = strtok(NULL, " ");
+	strcpy(tmp_seiseki.name, str);
 
+	for (i=0 ; i<3; i++)
+	{
+		str = strtok(NULL, " ");
+		
+		if (cmd[0] == "\0")
+		{
+			printf("オプションが足りません。\n");
+			return 0;
+		}	  
+		else if(checknumber(&str[0]))
+		{
+			printf("100以下の整数を入力してください。\n");
+			return 0;
+		}
+		else
+		{
+		switch(i)
+		{
+			case 0:
+				tmp_seiseki.eng = atoi(str);
+				break;
+			case 1:
+				tmp_seiseki.lang = atoi(str);
+				break;
+			case 2:	
+				tmp_seiseki.math = atoi(str);
+			break;
+		}
+					
+	} 
+	}
+//	strcpy(record.name , tmp_record.name);
+//	record->eng = tmp_record.eng;
+//	record->math = tmp_record.math;
+//	record->lang = tmp_record.lang;
+//	record->total = tmp_record.eng + tmp_record.math + tmp_record.lang;
+	tmp_seiseki->total = tmp_seiseki.eng + tmp_seiseki.lang + tmp_seiseki.math;
+	record->seiseki[record->number] = tmp_seiseki; 
+	record->number++; 
+	printf("%d人目の成績を登録しました。\n", record->number);
+	return 1;
+}
 
 void i_command(char cmd[50], Record* record)
 {
@@ -104,25 +231,81 @@ void i_command(char cmd[50], Record* record)
 
 	if (str = NULL)	
 	{
-		input1by1();
+		input1by1(record);
 		break;	
 	}  	
 
 	else if (str[0] == "-" &&　str[1] == "f")
 	{
-		fileinput();
+		fileinput(cmd, record);
 		break;
 	}
 
 	else
 	{
-		input1shot();
+		input1shot(cmd, record);
 		break;	
 	}
 }
 
 //----------------------------------------------------------
 //Command "o"
+bool stdoutput(Record* record)
+{
+	int i,j,k;
+	printf("⭐︎-------成績一覧-------⭐︎");
+	printf("登録者数: %d人", record->number);
+	
+	if(record->number == 0)
+	{
+		return 0;
+	}
+
+	printf("\t\t英語\t国語\t数学\t合計\n");
+	float ave[4],dev[4];			
+	int max[4],min[4],total[4];
+	
+	for (i=0; i<4;i++)
+	{
+		ave[i]=0.f;
+		dev[i]=0.f;
+		max[i]=0;
+		min[i]=100;
+	}
+	
+
+	for(j=0; j<record->number; j++)
+	{
+		if(max[0] < record[j]->seiseki.eng)
+		max[0] = record[j]->seiseki.eng;
+		if(min[0] > record[j]->seiseki.eng)
+		min[0] = record[j]->seiseki.eng;
+
+		if(max[1] < record[j]->seiseki.lang)
+		max[1] = record[j]->seiseki.lang;
+		if(min[1] > record[j]->seiseki.lang)
+		min[1] = record[j]->seiseki.lang;
+				
+		if(max[2] < record[j]->seiseki.math)
+		max[2] = record[j]->seiseki.math;
+		if(min[2] > record[j]->seiseki.math)
+		min[2] = record[j]->seiseki.math;
+		
+		if(max[3] < record[j]->seiseki.total)
+		max[3] = record[j]->seiseki.total;
+		if(min[3] > record[j]->seiseki.total)
+		min[3] = record[j]->seiseki.total;
+	
+		ave[0] = ave[0]+ record->seiseki.eng;
+		ave[1] = ave[1]+ record->seiseki.lang;
+		ave[2] = ave[2]+ record->seiseki.math;
+	}
+	
+
+
+}
+
+ 	
 
 void o_command(char cmd[50], Record* record)
 {
@@ -132,8 +315,7 @@ void o_command(char cmd[50], Record* record)
 
 	if (str = NULL)	
 	{
-		stdoutput();
-		break;	
+		stdoutput();	
 	}  	
 
 	else if (str[0]== "-")
@@ -141,49 +323,49 @@ void o_command(char cmd[50], Record* record)
 		if(str[1] == "f")
 		{
 			fileoutput();
-			break;
+			return 1;
 		}
 		
 		else if(str[1] == "u")
 		{
 			namelist();	
-			break;
+			return 1;
 		}
 		
 		else if(str[1] == "n")
 		{
 			nameoutput();
-			break;
+			return 1;
 		}
 		
 		else if(str[1] == "e")
 		{
 			englishoutput();
-			break;
+			return 1;
 		}
 		
 		else if(str[1] == "l")
 		{
 			languageoutput();
-			break;
+			return 1;
 		}
 		
 		else if(str[1] == "m")
 		{
 			mathoutput();
-			break;
+			return 1;
 		}
 		else
 		 {
 			printf("このオプションは無効です\n");
 		}
-		break;
+		return 0;
 	}
 
 	else
 	{
 		printf("このオプションは無効です\n");
-		break;	
+		return 0;	
 	}
 }
 
@@ -192,9 +374,9 @@ void o_command(char cmd[50], Record* record)
 //Command "h"
 void h_command()
 {
-	puts("----------");
-	puts("|  Help  |");
-	puts("----------");
+	printf("----------\n");
+	printf("|  Help  |\n");
+	printf("----------\n");
 	printf( " i\t試験結果の入力\n");
 	printf( " i -f [FILE]\t試験結果をFILEから入力 \n");
 	printf( " i [名前][英語の点数][国語の点数][数学の点数]\t成績情報の簡易入力 \n\n");
@@ -211,14 +393,14 @@ void h_command()
 
 //----------------------------------------------------------
 //clear command
-void clearcmd(Command* command)
-{
-	command->command[0] = '\0';
-	int i = 0;
-	for (; i < 4; i++)
-		command->option[i][0] = '\0';
-	printf("\n:");
-} 
+//void clearcmd(Command* command)
+//{
+//	command->command[0] = '\0';
+//	int i = 0;
+//	for (; i < 4; i++)
+//		command->option[i][0] = '\0';
+//	printf("\n:");
+//} 
 
 //----------------------------------------------------------
 //initialize the record
