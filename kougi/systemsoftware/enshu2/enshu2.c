@@ -16,12 +16,12 @@ void printpuzzle(char** puzzle[3][3][1])
 void initpuzzle(char** puzzle[3][3][1])
 {
 
-    int i,j,;
+    int i,j;
     for(i = 0;i < 3; i++)
     {
         for(j = 0; j < 3;j++)
         {
-            puzzle[i][j] = '';
+            puzzle[i][j] = NULL;
         }
     }
 
@@ -34,7 +34,7 @@ void initpuzzle(char** puzzle[3][3][1])
     puts("---------");
 
     int k;
-    char tmp;
+    char tmp[];
     for(k=1;k<9;)
     {
         printf("%dを配置する場所の番号を入力してください。¥n", k);
@@ -45,10 +45,10 @@ void initpuzzle(char** puzzle[3][3][1])
             puts("1から9までの整数を入力してください。");
         }
 
-        else if (!strcmp(puzzle[tmp/3][tmp%3] , ''))
+        else if (!strcmp(puzzle[tmp/3][tmp%3] , NULL))
         {
-            *puzzle[tmp/3][tmp%3] =  tmp;
-            printf("%dを%d番に配置しました。¥n");
+            *puzzle[tmp/3][tmp%3] =  &tmp;
+            printf("%dを%s番に配置しました。¥n",k,&tmp);
             k++;
         }
 
@@ -64,7 +64,7 @@ void initpuzzle(char** puzzle[3][3][1])
 }
 
 
-void main()
+int main()
 {
 	int* puzzle[3][3][1];
 
