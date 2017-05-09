@@ -1,0 +1,13 @@
+i_command 
+	file input
+
+o_command 
+	namelist 
+	nameoutput  certain student's seiseki
+	englishoutpu
+	languageoutput
+	mathoutput
+	
+
+debug 	
+
