@@ -1,72 +1,70 @@
 #include<stdio.h>
 
-void printpuzzle(char** puzzle[3][3][1])
+void printpuzzle(int puzzle[])
 {
     puts("-------");
-    printf("|%s|%s|%s|",puzzle[1][1],puzzle[1][2],puzzle[1][3]);
+    printf("|%d|%d|%d|\n",puzzle[0],puzzle[1],puzzle[2]);
     puts("-------");
-    printf("|%s|%s|%s|",puzzle[2][1],puzzle[2][2],puzzle[2][3])
+    printf("|%d|%d|%d|\n",puzzle[3],puzzle[4],puzzle[5]);
     puts("-------");
-    printf("|%s|%s|%s|",puzzle[3][1],puzzle[3][2],puzzle[3][3])
+    printf("|%d|%d|%d|\n",puzzle[6],puzzle[7],puzzle[8]);
     puts("-------");
 }
 
 
-
-void initpuzzle(char** puzzle[3][3][1])
+void initpuzzle(int puzzle[])
 {
 
     int i,j;
-    for(i = 0;i < 3; i++)
+    for(i = 0;i < 9; i++)
     {
-        for(j = 0; j < 3;j++)
-        {
-            puzzle[i][j] = NULL;
-        }
+        puzzle[i]=0;
     }
 
-    puts("---------");
-    puts("|①|②|③|");
-    puts("---------");
-    puts("|④|⑤|⑥|");
-    puts("---------");
-    puts("|⑦|⑧|⑨|");
-    puts("---------");
+    puts("-------");
+    puts("|1|2|3|");
+    puts("-------");
+    puts("|4|5|6|");
+    puts("-------");
+    puts("|7|8|9|");
+    puts("-------");
 
     int k;
-    char tmp[];
+    int tmp = 0;
     for(k=1;k<9;)
     {
-        printf("%dを配置する場所の番号を入力してください。¥n", k);
-        scanf("%s¥n",tmp);
+        printf("%dを配置する場所の番号を入力してください。\n", k);
+        tmp = 0;
 
-        if(atoi(tmp) < 1 || atoi(tmp) > 9)
+        scanf("%d",&tmp);
+
+        if(tmp < 1 || tmp > 9)
         {
             puts("1から9までの整数を入力してください。");
         }
 
-        else if (!strcmp(puzzle[tmp/3][tmp%3] , NULL))
+        else if (puzzle[tmp] == 0)
         {
-            *puzzle[tmp/3][tmp%3] =  &tmp;
-            printf("%dを%s番に配置しました。¥n",k,&tmp);
+            puzzle[tmp-1] =  k;
+            printf("%dを%d番に配置しました。\n",k,tmp);
             k++;
+
         }
 
         else
         {
-            puts("すでに数字が存在します。");
+            puts("その場所には配置できません。");
         }
     }
-
+    puts("配置が完了しました。");
     printpuzzle(puzzle);
-
 
 }
 
 
 int main()
 {
-	int* puzzle[3][3][1];
+	int puzzle[9];
 
 	initpuzzle(puzzle);
 	
