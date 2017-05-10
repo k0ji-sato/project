@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/Config.h
+
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/PgmIO.h
+stdio.h
+-
+
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/RecognitionResult.h
+
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/main.cpp
+stdlib.h
+-
+Config.h
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/Config.h
+PgmIO.h
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/PgmIO.h
+RecognitionResult.h
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/RecognitionResult.h
+

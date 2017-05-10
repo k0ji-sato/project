@@ -111,10 +111,14 @@ return 9;
 
 int possibletomove(int locate, int zero)
 {
-	if(locate == zero+1 || locate == zero-1 || locate == zero + 3 || locate == zero - 3)
-	{
+	if (locate == zero + 1 && zero%3 != 2)
 		return 1; 
-	}	
+	if (locate == zero - 1 && zero%3 != 0)
+		return 1;
+	if (locate == zero + 3 && zero/3 != 2)
+		return 1;
+	if (locate == zero - 3 && zero/3 != 0)
+		return 1;
 	
 	return 0;
 }
