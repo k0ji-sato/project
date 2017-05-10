@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/koji/project/kougi/systemsoftware/enshu2/tansaku/enshu2.c
+stdio.h
+-
+queueI.h
+/Users/koji/project/kougi/systemsoftware/enshu2/tansaku/queueI.h
+queueS.h
+/Users/koji/project/kougi/systemsoftware/enshu2/tansaku/queueS.h
+
+/Users/koji/project/kougi/systemsoftware/enshu2/tansaku/queueI.h
+
+/Users/koji/project/kougi/systemsoftware/enshu2/tansaku/queueS.h
+

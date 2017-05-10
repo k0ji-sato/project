@@ -1,4 +1,11 @@
 #include<stdio.h>
+#include"queueI.h"
+#include"queueS.h"
+
+typedef struct{
+    int puzzle[9];
+    int lastmove;
+}Puzzle;
 
 void printpuzzle(int puzzle[])
 {
@@ -12,72 +19,32 @@ void printpuzzle(int puzzle[])
 }
 
 
-void initpuzzle(int puzzle[], int* zero)
+void initpuzzle(int *puzzle, int* zero)
 {
-
-    int i,j;
-    for(i = 0;i < 9; i++)
-    {
-        puzzle[i]=0;
-    }
-
-    puts("-------");
-    puts("|1|2|3|");
-    puts("-------");
-    puts("|4|5|6|");
-    puts("-------");
-    puts("|7|8|9|");
-    puts("-------");
-
-    int k;
-    int tmp = 0;
-    for(k=1;k<9;)
-    {
-	tmp = 0;
-        printf("%dを配置する場所の番号を入力してください。\n", k);
-        scanf("%d",&tmp);
-
-        if(tmp < 1 || tmp > 9)
-        {
-            puts("1から9までの整数を入力してください。");
-        }
-
-        else if (puzzle[tmp-1] == 0)
-        {
-            puzzle[tmp-1] =  k;
-            printf("%dを%d番に配置しました。\n",k,tmp);
-            k++;
-
-        }
-
-        else
-        {
-            puts("その場所には配置できません。");
-        }
-    }
-    puts("配置が完了しました。");
+    puzzle[0]=8;
+	puzzle[1]=1;
+    puzzle[2]=7;
+    puzzle[3]=6;
+    puzzle[4]=3;
+    puzzle[5]=4;
+    puzzle[6]=2;
+    puzzle[7]=0;
+    puzzle[8]=5;
     printpuzzle(puzzle);
 
-	for (j=0 ;j<9;j++)
-	{
-		if(puzzle[j]==0)
-		{
-			*zero = j;
-			break;
-		}
-	}	 
+	*zero = 7;
 }
 
-void Move(int puzzle[], int n, int* zero)
+void Move(int puzzle[], int locate, int* zero)
 {
 	int tmp;
 	int i;
 
-	tmp = puzzle[n];
-	puzzle[n] = puzzle[*zero];
+	tmp = puzzle[locate];
+	puzzle[locate] = puzzle[*zero];
 	puzzle[*zero] = tmp;
 
-	*zero = n;
+	*zero = locate;
 }
 
 int FinishCheck(int puzzle[])
@@ -111,58 +78,81 @@ return 9;
 
 int possibletomove(int locate, int zero)
 {
-	if(locate == zero+1 || locate == zero-1 || locate == zero + 3 || locate == zero - 3)
-	{
-		return 1; 
-	}	
-	
-	return 0;
+    if (locate == zero + 1 && zero%3 != 2)
+        return 1;
+    if (locate == zero - 1 && zero%3 != 0)
+        return 1;
+    if (locate == zero + 3 && zero/3 != 2)
+        return 1;
+    if (locate == zero - 3 && zero/3 != 0)
+        return 1;
+
+    return 0;
 }
+
+void copypuzzle(int originalpuzzle[],int copiedpuzzle[])
+{
+    int i;
+    for (i=0;i<9;i++)
+    {
+        copiedpuzzle[i] = originalpuzzle[i];
+    }
+}
+
+void SPS(int puzzle[], int zero)
+{
+    QueueS queueS;
+
+    int tmp_puzzle[9];
+    int locate;
+
+    while(1)
+    {
+        getQS(&queueS, puzzle);
+        copypuzzle(puzzle,tmp_puzzle);
+
+        int i;
+        for(i=0;i<9;i++)
+        {
+            locate = locatesearch(puzzle,i);
+            if (possibletomove(locate,zero))
+            {
+                Move(tmp_puzzle,locate,&zero);
+                if(FinishCheck(puzzle))
+                {
+                    copypuzzle(tmp_puzzle,puzzle);
+                    return ;
+                }
+                putQS(&queueS,tmp_puzzle);
+                copypuzzle(puzzle,tmp_puzzle);
+            }
+        }
+
+
+
+    }
+
+
+}
+
 
 int main()
 {
 	int puzzle[9];
-	int tmp;
+	int tmp_puzzle[9];
+    int tmp;
 	int count = 0;
 	int locate = 0;
 	int zero;
+    QueueS queueS;
 
 	initpuzzle(puzzle,&zero);
-	
-	puts("ゲームスタートです。");
-	while(!FinishCheck(puzzle))	
-	{
-		tmp = 0;
-		printf("動かしたい数字を入力してください。\n");
-		scanf("%d" , &tmp);	
-		
-		if (0<tmp && tmp <9)
-		{		
-			locate = locatesearch(puzzle,tmp);
-			
-			if (locate < 0 || locate > 8)	break; //バグ対策				
-			
-			if(possibletomove(locate,zero))
-			{ 
-				Move(puzzle, locate, &zero);
-				printpuzzle(puzzle);
-				count++;
-			}
-			
-			else
-			{
-				puts("無効な入力です。");
-			}
-		}
-		
-		else 
-		{
-			puts("無効な入力です。");
-		}
-	}
-		
-	puts("おめでとうございます。ゲームクリアです。");
-	printf("クリアまでにかかった手数は%d手です。\n", count);		
+
+    SPS(puzzle,zero);
+
+    printpuzzle(puzzle);
+
+	printf("クリアまでにかかった手数は%d手です。\n", count);
     return 0;
 
 }
