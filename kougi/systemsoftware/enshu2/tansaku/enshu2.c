@@ -1,59 +1,54 @@
 #include<stdio.h>
-#include"queueI.h"
-#include"queueS.h"
+#include"queueP.h"
 
-typedef struct{
-    int puzzle[9];
-    int lastmove;
-}Puzzle;
 
-void printpuzzle(int puzzle[])
+void printpuzzle(Puzzle* puzzle)
 {
     puts("-------");
-    printf("|%d|%d|%d|\n",puzzle[0],puzzle[1],puzzle[2]);
+    printf("|%d|%d|%d|\n",puzzle->puzzle[0],puzzle->puzzle[1],puzzle->puzzle[2]);
     puts("-------");
-    printf("|%d|%d|%d|\n",puzzle[3],puzzle[4],puzzle[5]);
+    printf("|%d|%d|%d|\n",puzzle->puzzle[3],puzzle->puzzle[4],puzzle->puzzle[5]);
     puts("-------");
-    printf("|%d|%d|%d|\n",puzzle[6],puzzle[7],puzzle[8]);
+    printf("|%d|%d|%d|\n",puzzle->puzzle[6],puzzle->puzzle[7],puzzle->puzzle[8]);
     puts("-------");
 }
 
 
-void initpuzzle(int *puzzle, int* zero)
+void initpuzzle(Puzzle* puzzle, int* zero)
 {
-    puzzle[0]=8;
-	puzzle[1]=1;
-    puzzle[2]=7;
-    puzzle[3]=6;
-    puzzle[4]=3;
-    puzzle[5]=4;
-    puzzle[6]=2;
-    puzzle[7]=0;
-    puzzle[8]=5;
+    puzzle->puzzle[0]=8;
+    puzzle->puzzle[1]=1;
+    puzzle->puzzle[2]=7;
+    puzzle->puzzle[3]=6;
+    puzzle->puzzle[4]=3;
+    puzzle->puzzle[5]=4;
+    puzzle->puzzle[6]=2;
+    puzzle->puzzle[7]=0;
+    puzzle->puzzle[8]=5;
+
+    puzzle->lastmove = 0;
+    puzzle->depth = 0;
     printpuzzle(puzzle);
 
-	*zero = 7;
 }
 
-void Move(int puzzle[], int locate, int* zero)
+void Move(Puzzle* puzzle, int locate, int* zero)
 {
 	int tmp;
-	int i;
 
-	tmp = puzzle[locate];
-	puzzle[locate] = puzzle[*zero];
-	puzzle[*zero] = tmp;
+	tmp = puzzle->puzzle[locate];
+    puzzle->puzzle[locate] = puzzle->puzzle[*zero];
+    puzzle->puzzle[*zero] = tmp;
 
-	*zero = locate;
+    puzzle->depth++;
 }
 
-int FinishCheck(int puzzle[])
+int FinishCheck(Puzzle puzzle)
 {
 	int i;
-	
 	for (i=0;i<8;i++)
 	{
-		if (puzzle[i] != i+1)
+		if (puzzle.puzzle[i] != i+1)
 		{
 			return 0;
 		}
@@ -62,12 +57,12 @@ int FinishCheck(int puzzle[])
 	return 1; 
 }
 
-int locatesearch(int puzzle[],int n)
+int locatesearch(Puzzle puzzle,int n)
 {
 	int i;
 	for (i = 0; i < 9; i++)
 	{
-		if (puzzle[i] == n)
+		if (puzzle.puzzle[i] == n)
 		{
 			return i;
 		} 	
@@ -90,69 +85,70 @@ int possibletomove(int locate, int zero)
     return 0;
 }
 
-void copypuzzle(int originalpuzzle[],int copiedpuzzle[])
-{
-    int i;
-    for (i=0;i<9;i++)
-    {
-        copiedpuzzle[i] = originalpuzzle[i];
-    }
-}
 
-void SPS(int puzzle[], int zero)
+int SPS(Puzzle puzzle)
 {
-    QueueS queueS;
-
-    int tmp_puzzle[9];
+    QueueP queueP;
+    Puzzle tmp_puzzle;
+    int zero;
     int locate;
+    int countg=0;
+    int countp=0;
+    InitQP(&queueP);
+    putQP(&queueP,&puzzle);
 
-    while(1)
+    while(!emptyQP(&queueP) && !fullQP(&queueP))
     {
-        getQS(&queueS, puzzle);
-        copypuzzle(puzzle,tmp_puzzle);
-
+        getQP(&queueP, &puzzle);
+        countg++;
+        zero = locatesearch(puzzle, 0);
+        tmp_puzzle = puzzle;
         int i;
-        for(i=0;i<9;i++)
+        for(i=1;i<9;i++)
         {
-            locate = locatesearch(puzzle,i);
-            if (possibletomove(locate,zero))
+            locate = locatesearch(tmp_puzzle,i);
+            if (possibletomove(locate,zero) && i != tmp_puzzle.lastmove)
             {
-                Move(tmp_puzzle,locate,&zero);
-                if(FinishCheck(puzzle))
+                Move(&tmp_puzzle,locate,&zero);
+                tmp_puzzle.lastmove=i;
+                //printf("depth=%d\n",tmp_puzzle.depth);
+                if(FinishCheck(tmp_puzzle))
                 {
-                    copypuzzle(tmp_puzzle,puzzle);
-                    return ;
+                    printpuzzle(&tmp_puzzle);
+                    //printf("put%d回\n",countp);
+                    //printf("get%d回\n",countg);
+                    printf("headQ %d\n",queueP.headQ);
+                    printf("tailQ %d\n",queueP.tailQ);
+                    return tmp_puzzle.depth;
                 }
-                putQS(&queueS,tmp_puzzle);
-                copypuzzle(puzzle,tmp_puzzle);
+                putQP(&queueP,&tmp_puzzle);
+                countp++;
+                tmp_puzzle = puzzle;
             }
         }
 
 
 
     }
-
+    printf("探索できませんでした");
+    return 0;
 
 }
 
 
 int main()
 {
-	int puzzle[9];
-	int tmp_puzzle[9];
-    int tmp;
-	int count = 0;
-	int locate = 0;
+	Puzzle puzzle;
 	int zero;
-    QueueS queueS;
+    int depth;
 
-	initpuzzle(puzzle,&zero);
+	initpuzzle(&puzzle,&zero);
 
-    SPS(puzzle,zero);
+    depth = SPS(puzzle);
 
-    printpuzzle(puzzle);
 
-	printf("クリアまでにかかった手数は%d手です。\n", count);
+	printf("クリアまでにかかった手数は%d手です。\n", depth);
+
     return 0;
 
 }

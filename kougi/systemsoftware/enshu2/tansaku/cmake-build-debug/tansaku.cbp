@@ -88,6 +88,9 @@
 		<Unit filename="/Users/koji_sato/project/kougi/systemsoftware/enshu2/tansaku/queueI.h">
 			<Option target="tansaku"/>
 		</Unit>
+		<Unit filename="/Users/koji_sato/project/kougi/systemsoftware/enshu2/tansaku/queueP.h">
+			<Option target="tansaku"/>
+		</Unit>
 		<Unit filename="/Users/koji_sato/project/kougi/systemsoftware/enshu2/tansaku/queueS.h">
 			<Option target="tansaku"/>
 		</Unit>

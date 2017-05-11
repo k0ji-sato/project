@@ -35,7 +35,14 @@ void putQS(QueueS* queueS, int puzzle[])
 	        queueS->queue[i][queueS->tailQ] = puzzle[i];
 	    }
 	    queueS->flag[queueS->tailQ] = 1;
-	    queueS->tailQ++;
+        if (queueS->tailQ!=MAXQS-1)
+        {
+            queueS->tailQ++;
+        }
+        else
+        {
+            queueS->tailQ = 0;
+        }
     }
     else puts("これ以上キューに入れられません。");
 }
@@ -50,7 +57,13 @@ void getQS(QueueS* queueS, int puzzle[])
 		    puzzle[i] = queueS->queue[i][queueS->headQ];
 	    }
 	    queueS->flag[queueS->headQ] = 0;
-	    queueS->headQ++;
+        if (queueS->headQ != MAXQS-1) {
+            queueS->headQ++;
+        }
+        else
+        {
+            queueS->headQ = 0;
+        }
     }
     else puts("キューの中身が存在しません。");
 }
