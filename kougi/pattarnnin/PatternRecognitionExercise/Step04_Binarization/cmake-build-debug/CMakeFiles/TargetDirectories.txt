@@ -1,0 +1,3 @@
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step04_Binarization/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step04_Binarization/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step04_Binarization/cmake-build-debug/CMakeFiles/Step04_Binarization.dir

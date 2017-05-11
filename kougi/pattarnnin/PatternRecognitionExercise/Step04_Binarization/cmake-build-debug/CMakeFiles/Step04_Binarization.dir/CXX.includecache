@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step04_Binarization/Config.h
+
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step04_Binarization/PgmIO.h
+stdio.h
+-
+
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step04_Binarization/main.cpp
+Config.h
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step04_Binarization/Config.h
+PgmIO.h
+/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step04_Binarization/PgmIO.h
+
