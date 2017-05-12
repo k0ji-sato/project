@@ -1,0 +1,4 @@
+﻿  degital2.cpp
+c:\users\智也\documents\visual studio 2015\projects\degital2\degital2\degital2.cpp(262): warning C4101: 'espctl': ローカル変数は 1 度も使われていません。
+c:\users\智也\documents\visual studio 2015\projects\degital2\degital2\degital2.cpp(262): warning C4101: 'pspctl': ローカル変数は 1 度も使われていません。
+  degital2.vcxproj -> C:\Users\智也\documents\visual studio 2015\Projects\degital2\Debug\degital2.exe

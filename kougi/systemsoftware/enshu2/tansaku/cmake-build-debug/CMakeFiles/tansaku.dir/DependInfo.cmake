@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/koji_sato/project/kougi/systemsoftware/enshu2/tansaku/enshu2.c" "/Users/koji_sato/project/kougi/systemsoftware/enshu2/tansaku/cmake-build-debug/CMakeFiles/tansaku.dir/enshu2.c.o"
+  "/Users/koji/project/kougi/systemsoftware/enshu2/tansaku/enshu2.c" "/Users/koji/project/kougi/systemsoftware/enshu2/tansaku/cmake-build-debug/CMakeFiles/tansaku.dir/enshu2.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

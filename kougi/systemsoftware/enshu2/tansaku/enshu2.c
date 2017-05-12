@@ -92,15 +92,15 @@ int SPS(Puzzle puzzle)
     Puzzle tmp_puzzle;
     int zero;
     int locate;
-    int countg=0;
-    int countp=0;
+    //int countg=0;
+    //int countp=0;
     InitQP(&queueP);
     putQP(&queueP,&puzzle);
 
     while(!emptyQP(&queueP) && !fullQP(&queueP))
     {
         getQP(&queueP, &puzzle);
-        countg++;
+        //countg++;
         zero = locatesearch(puzzle, 0);
         tmp_puzzle = puzzle;
         int i;
@@ -122,7 +122,7 @@ int SPS(Puzzle puzzle)
                     return tmp_puzzle.depth;
                 }
                 putQP(&queueP,&tmp_puzzle);
-                countp++;
+                //countp++;
                 tmp_puzzle = puzzle;
             }
         }
