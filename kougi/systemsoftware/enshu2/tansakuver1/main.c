@@ -3,6 +3,7 @@
 #include"queuePI.h"
 #include"intmath.h"
 #include"hash.h"
+#include<sys/time.h>
 
 // Puzzle型をPuzzleInt型に
 void PuzzletoInt(Puzzle* puzzle , PuzzleInt* puzzleint)
@@ -52,14 +53,14 @@ void printpuzzle(Puzzle* puzzle)
 void initpuzzle(Puzzle* puzzle, int* zero)
 {
     puzzle->puzzle[0]=8;
-    puzzle->puzzle[1]=1;
+    puzzle->puzzle[1]=6;
     puzzle->puzzle[2]=7;
-    puzzle->puzzle[3]=6;
-    puzzle->puzzle[4]=3;
+    puzzle->puzzle[3]=2;
+    puzzle->puzzle[4]=5;
     puzzle->puzzle[5]=4;
-    puzzle->puzzle[6]=2;
+    puzzle->puzzle[6]=3;
     puzzle->puzzle[7]=0;
-    puzzle->puzzle[8]=5;
+    puzzle->puzzle[8]=1;
 
     puzzle->lastmove = 0;
     puzzle->depth = 0;
@@ -130,6 +131,7 @@ int SPS(Puzzle puzzle)
     PuzzleInt puzzleint;
     Hash hash;
 
+    inithash(&hash);
     //int countg=0;
     //int countp=0;
     InitQPI(&queuePI);
@@ -139,7 +141,6 @@ int SPS(Puzzle puzzle)
     while(!emptyQPI(&queuePI) && !fullQPI(&queuePI))
     {
         getQPI(&queuePI, &puzzleint);
-        //countg++;
         InttoPuzzle(&puzzleint,&puzzle);
         zero = locatesearch(puzzle, 0);
         tmp_puzzle = puzzle;
@@ -147,18 +148,14 @@ int SPS(Puzzle puzzle)
         for(i=1;i<9;i++)
         {
             locate = locatesearch(tmp_puzzle,i);
+
             if (possibletomove(locate,zero) && i != tmp_puzzle.lastmove)
             {
                 Move(&tmp_puzzle,locate,&zero);
                 tmp_puzzle.lastmove=i;
-                //printf("depth=%d\n",tmp_puzzle.depth);
                 if(FinishCheck(tmp_puzzle))
                 {
                     printpuzzle(&tmp_puzzle);
-                    //printf("put%d回\n",countp);
-                    //printf("get%d回\n",countg);
-                    //printf("headQ %d\n",queuePI.headQ);
-                    //printf("tailQ %d\n",queuePI.tailQ);
                     return tmp_puzzle.depth;
                 }
                 PuzzleInt tmp_puzzleint;
@@ -169,8 +166,7 @@ int SPS(Puzzle puzzle)
                     putQPI(&queuePI,&tmp_puzzleint);
                 }
 
-                //countp++;
-                tmp_puzzle = puzzle;
+                tmp_puzzle = puzzle; //reset tmp_puzzle
             }
         }
 
@@ -188,13 +184,18 @@ int main()
     Puzzle puzzle;
     int zero;
     int depth;
+    struct timeval s,e;
 
     initpuzzle(&puzzle,&zero);
 
+    gettimeofday(&s,NULL);
+
     depth = SPS(puzzle);
 
+    gettimeofday(&e,NULL);
 
     printf("クリアまでにかかった手数は%d手です。\n", depth);
+    printf("実行時間%lf [sec]\n", (e.tv_sec-s.tv_sec)+(e.tv_usec-s.tv_usec)*1.0E-6);
 
     return 0;
 
