@@ -6,21 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/Config.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/Config.h
 
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/PgmIO.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/PgmIO.h
 stdio.h
 -
 
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/RecognitionResult.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/RecognitionResult.h
 
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/main.cpp
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/main.cpp
 stdlib.h
 -
 Config.h
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/Config.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/Config.h
 PgmIO.h
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/PgmIO.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/PgmIO.h
 RecognitionResult.h
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/RecognitionResult.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/RecognitionResult.h
 

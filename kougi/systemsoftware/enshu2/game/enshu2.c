@@ -1,5 +1,37 @@
 #include<stdio.h>
 
+int locatesearch(int puzzle[],int n)
+{
+    int i;
+    for (i = 0; i < 9; i++)
+    {
+        if (puzzle[i] == n)
+        {
+            return i;
+        }
+    }
+    return 9;
+}
+void Move(int puzzle[], int n, int *zero)
+{
+    int tmp;
+
+    tmp = puzzle[n];
+    puzzle[n] = puzzle[*zero];
+    puzzle[*zero] = tmp;
+
+    *zero = n;
+}
+
+void Switch(int puzzle[],int n,int m)
+{
+    int tmp;
+
+    tmp = puzzle[n];
+    puzzle[n] = puzzle[m];
+    puzzle[m] = tmp;
+}
+
 void printpuzzle(int puzzle[])
 {
     puts("-------");
@@ -11,6 +43,41 @@ void printpuzzle(int puzzle[])
     puts("-------");
 }
 
+int checkpuzzle(int oripuzzle[])
+{
+    int count = 0;
+    int zero;
+    int tmp;
+    int puzzle[9];
+    int j;
+
+    for(j=0;j<9;j++)
+    {
+        puzzle[j]=oripuzzle[j];
+    }
+
+    zero = locatesearch(puzzle,0);
+    zero = zero%2;
+    int i;
+
+    for (i=0;i<8;i++)
+    {
+        if (puzzle[i]!=i+1)
+        {
+            tmp = locatesearch(puzzle,i+1);
+            Switch(puzzle,i,tmp);
+            count++;
+        }
+    }
+
+    count = count%2;
+
+    if (count==zero){
+        return 1;
+    }
+    else
+        return 0;
+}
 
 void initpuzzle(int puzzle[], int* zero)
 {
@@ -20,65 +87,51 @@ void initpuzzle(int puzzle[], int* zero)
     {
         puzzle[i]=0;
     }
-
-    puts("-------");
-    puts("|1|2|3|");
-    puts("-------");
-    puts("|4|5|6|");
-    puts("-------");
-    puts("|7|8|9|");
-    puts("-------");
-
     int k;
     int tmp = 0;
-    for(k=1;k<9;)
-    {
-	tmp = 0;
-        printf("%dを配置する場所の番号を入力してください。\n", k);
-        scanf("%d",&tmp);
 
-        if(tmp < 1 || tmp > 9)
-        {
-            puts("1から9までの整数を入力してください。");
+    while(1) {
+        puts("-------");
+        puts("|1|2|3|");
+        puts("-------");
+        puts("|4|5|6|");
+        puts("-------");
+        puts("|7|8|9|");
+        puts("-------");
+
+        for (k = 1; k < 9;) {
+            tmp = 0;
+            printf("%dを配置する場所の番号を入力してください。\n", k);
+            scanf("%d", &tmp);
+
+            if (tmp < 1 || tmp > 9) {
+                puts("1から9までの整数を入力してください。");
+            } else if (puzzle[tmp - 1] == 0) {
+                puzzle[tmp - 1] = k;
+                printf("%dを%d番に配置しました。\n", k, tmp);
+                k++;
+
+            } else {
+                puts("その場所には配置できません。");
+            }
         }
-
-        else if (puzzle[tmp-1] == 0)
-        {
-            puzzle[tmp-1] =  k;
-            printf("%dを%d番に配置しました。\n",k,tmp);
-            k++;
-
-        }
-
-        else
-        {
-            puts("その場所には配置できません。");
+        if (checkpuzzle(puzzle)) break;
+        else {
+            printf("その配置はクリア不可能です。\n");
+            for(j = 0;j < 9; j++)
+            {
+                puzzle[j]=0;
+            }
         }
     }
-    puts("配置が完了しました。");
-    printpuzzle(puzzle);
 
-	for (j=0 ;j<9;j++)
-	{
-		if(puzzle[j]==0)
-		{
-			*zero = j;
-			break;
-		}
-	}	 
+        puts("配置が完了しました。");
+        printpuzzle(puzzle);
+
+        *zero = locatesearch(puzzle, 0);
+
 }
 
-void Move(int puzzle[], int n, int* zero)
-{
-	int tmp;
-	int i;
-
-	tmp = puzzle[n];
-	puzzle[n] = puzzle[*zero];
-	puzzle[*zero] = tmp;
-
-	*zero = n;
-}
 
 int FinishCheck(int puzzle[])
 {
@@ -95,18 +148,6 @@ int FinishCheck(int puzzle[])
 	return 1; 
 }
 
-int locatesearch(int puzzle[],int n)
-{
-	int i;
-	for (i = 0; i < 9; i++)
-	{
-		if (puzzle[i] == n)
-		{
-			return i;
-		} 	
-	} 
-return 9;
-}
 
 
 int possibletomove(int locate, int zero)
@@ -123,6 +164,7 @@ int possibletomove(int locate, int zero)
 	return 0;
 }
 
+
 int main()
 {
 	int puzzle[9];
@@ -133,21 +175,21 @@ int main()
 	int cmd = 0;
 while(1)
 {	
-	initpuzzle(puzzle,&zero);
-	count = 0;	
+    initpuzzle(puzzle,&zero);
+    count = 0;
 	puts("ゲームスタートです。");
 	while(!FinishCheck(puzzle))	
 	{
 		tmp = 0;
-		printf("動かしたい数字を入力してください。\n");
-		scanf("%d" , &tmp);	
-		
-		if (0<tmp && tmp <9)
+		puts("動かしたい数字を入力してください。");
+		scanf("%d" , &tmp);
+
+		 if (0<tmp && tmp <9)
 		{		
 			locate = locatesearch(puzzle,tmp);
 			
-			if (locate < 0 || locate > 8)	break; //バグ対策				
-			
+			if (locate < 0 || locate > 8)	break; //バグ対策
+
 			if(possibletomove(locate,zero))
 			{ 
 				Move(puzzle, locate, &zero);

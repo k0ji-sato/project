@@ -53,14 +53,14 @@ void printpuzzle(Puzzle* puzzle)
 void initpuzzle(Puzzle* puzzle, int* zero)
 {
     puzzle->puzzle[0]=8;
-    puzzle->puzzle[1]=6;
+    puzzle->puzzle[1]=1;
     puzzle->puzzle[2]=7;
-    puzzle->puzzle[3]=2;
-    puzzle->puzzle[4]=5;
+    puzzle->puzzle[3]=6;
+    puzzle->puzzle[4]=3;
     puzzle->puzzle[5]=4;
-    puzzle->puzzle[6]=3;
+    puzzle->puzzle[6]=2;
     puzzle->puzzle[7]=0;
-    puzzle->puzzle[8]=1;
+    puzzle->puzzle[8]=5;
 
     puzzle->lastmove = 0;
     puzzle->depth = 0;

@@ -1,3 +1,3 @@
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/cmake-build-debug/CMakeFiles/Step05_kNearestNeighbor.dir
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step05_kNearestNeighbor/cmake-build-debug/CMakeFiles/Step05_kNearestNeighbor.dir

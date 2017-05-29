@@ -6,21 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/Config.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/Config.h
 
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/PgmIO.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/PgmIO.h
 stdio.h
 -
 
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/RecognitionResult.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/RecognitionResult.h
 
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/main.cpp
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/main.cpp
 stdlib.h
 -
 Config.h
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/Config.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/Config.h
 PgmIO.h
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/PgmIO.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/PgmIO.h
 RecognitionResult.h
-/Users/koji/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/RecognitionResult.h
+/Users/koji_sato/project/kougi/pattarnnin/PatternRecognitionExercise/Step03_TemplateMatching/RecognitionResult.h
 

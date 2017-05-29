@@ -4,6 +4,10 @@ project(game)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
-        enshu2.c)
+        enshu2.c
+        hash.h
+        intmath.h
+        queueP.h
+        queuePI.h)
 
 add_executable(game ${SOURCE_FILES})

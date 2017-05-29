@@ -54,10 +54,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/koji/project/kougi/systemsoftware/enshu2/game
+CMAKE_SOURCE_DIR = /Users/koji_sato/project/kougi/systemsoftware/enshu2/game
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/koji/project/kougi/systemsoftware/enshu2/game/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/koji_sato/project/kougi/systemsoftware/enshu2/game/cmake-build-debug
 
 #=============================================================================
 # Target rules for target CMakeFiles/game.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /Users/koji/project/kougi/systemsoftware/enshu2/game/cmake-bu
 CMakeFiles/game.dir/all:
 	$(MAKE) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/depend
 	$(MAKE) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/koji/project/kougi/systemsoftware/enshu2/game/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target game"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/koji_sato/project/kougi/systemsoftware/enshu2/game/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target game"
 .PHONY : CMakeFiles/game.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/game.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/game.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/koji/project/kougi/systemsoftware/enshu2/game/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/koji_sato/project/kougi/systemsoftware/enshu2/game/cmake-build-debug/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/game.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/koji/project/kougi/systemsoftware/enshu2/game/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/koji_sato/project/kougi/systemsoftware/enshu2/game/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/game.dir/rule
 
 # Convenience name for target.

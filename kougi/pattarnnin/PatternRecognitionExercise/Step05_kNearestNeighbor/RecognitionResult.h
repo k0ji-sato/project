@@ -107,7 +107,7 @@ typedef struct RecognitionResult {
 
 		printf("\n\n");
 		for (i=0; i<class_num; i++){
-			printf("\tC%d", i);	
+			printf("\tC%d\t", i);
 		}
 		printf("\n");
 		for (i=0; i<class_num; i++){

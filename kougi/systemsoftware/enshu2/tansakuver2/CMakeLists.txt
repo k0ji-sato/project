@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
-project(tansaku_hash)
+project(tansakuver2)
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -10,4 +10,4 @@ set(SOURCE_FILES
         queueP.h
         queuePI.h)
 
-add_executable(tansaku_hash ${SOURCE_FILES})
+add_executable(tansakuver2 ${SOURCE_FILES})
